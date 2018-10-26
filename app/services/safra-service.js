@@ -21,6 +21,7 @@ let SafraService = class SafraService {
         return Promise.reject(err.message || err);
     }
     saveImplementacao(imp) {
+        console.log(JSON.stringify(imp));
         return this.http
             .post(" ", JSON.stringify(imp), { headers: this.headers })
             .toPromise()

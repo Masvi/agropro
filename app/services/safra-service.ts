@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Implantacao } from '../classes/implantacao';
+import { Implementation } from '../classes/implementation';
 import { Manutencao } from '../classes/manutencao';
 import { Colheita } from '../classes/colheita';
 
@@ -20,11 +20,12 @@ export class SafraService {
         return Promise.reject(err.message || err);
     }
 
-    saveImplementacao(imp: Implantacao): Promise<any> {
+    saveImplementacao(imp: Implementation): Promise<any> {
+        console.log(JSON.stringify(imp))
         return this.http
             .post(" ", JSON.stringify(imp), { headers: this.headers })
             .toPromise()
-            .then((response: Response) => response.json().data as Implantacao)
+            .then((response: Response) => response.json().data as Implementation)
             .catch(this.handleError);
     }
 

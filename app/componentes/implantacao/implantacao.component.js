@@ -10,24 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
-const implantacao_1 = require("../../classes/implantacao");
+const implementation_1 = require("../../classes/implementation");
 const safra_service_1 = require("../../services/safra-service");
 // frutiferas
-const impFrutAdubcao = [1.500, 22.000];
-const impFrutSemeadura = ['100.000', '630.097'];
-const impFrutMaquinario = ['1.500', '15.075'];
+const impFrutAdubcao = [1500, 22000];
+const impFrutSemeadura = [100.000, 630.097];
+const impFrutMaquinario = [1.500, 15.075];
 // hortalica
-const impHortAdubcao = ['6890', '57800'];
+const impHortAdubcao = [6890, 57800];
 const impHortSemeadura = [1, 10];
-const impHortMaquinario = ['1530', '6108'];
+const impHortMaquinario = [1530, 6108];
 // soja
-const impSojaAdubcao = ['5520', '102200'];
+const impSojaAdubcao = [5520, 102200];
 const impSojaSemeadura = [1, 10];
-const impSojaMaquinario = ['2450', '12060'];
+const impSojaMaquinario = [2450, 12060];
 // trigo
-const impTrigoAdubcao = ['12660', '150300'];
+const impTrigoAdubcao = [12660, 150300];
 const impTrigoSemeadura = [1, 10];
-const impTrigoMaquinario = ['2450', '12060'];
+const impTrigoMaquinario = [2450, 12060];
 let ImplantacaoComponent = class ImplantacaoComponent {
     constructor(router, safraService) {
         this.router = router;
@@ -54,13 +54,13 @@ let ImplantacaoComponent = class ImplantacaoComponent {
             }
         ];
         this.teste = 0;
-        this.implantacao = new implantacao_1.Implantacao();
+        this.implantacao = new implementation_1.Implementation();
         console.log(this.culture);
     }
     ngOnInit() { }
     cultureOption() {
         if (this.teste == 1) {
-            this.cultura = "Frutiferas";
+            this.implantacao.id_crop = 1;
             this.adubMin = impFrutAdubcao[0];
             this.adubMax = impFrutAdubcao[1];
             this.semMin = impFrutSemeadura[0];
@@ -72,7 +72,7 @@ let ImplantacaoComponent = class ImplantacaoComponent {
             this.maquinario = this.maqMin;
         }
         if (this.teste == 2) {
-            this.cultura = "Hortaliças";
+            this.implantacao.id_crop = 2;
             this.adubMin = impHortAdubcao[0];
             this.adubMax = impHortAdubcao[1];
             this.semMin = impHortSemeadura[0];
@@ -84,7 +84,7 @@ let ImplantacaoComponent = class ImplantacaoComponent {
             this.maquinario = this.maqMin;
         }
         if (this.teste == 3) {
-            this.cultura = "Soja";
+            this.implantacao.id_crop = 3;
             this.adubMin = impSojaAdubcao[0];
             this.adubMax = impSojaAdubcao[1];
             this.semMin = impSojaSemeadura[0];
@@ -96,7 +96,7 @@ let ImplantacaoComponent = class ImplantacaoComponent {
             this.maquinario = this.maqMin;
         }
         if (this.teste == 4) {
-            this.cultura = "Trigo";
+            this.implantacao.id_crop = 4;
             this.adubMin = impTrigoAdubcao[0];
             this.adubMax = impTrigoAdubcao[1];
             this.semMin = impTrigoSemeadura[0];
@@ -134,10 +134,10 @@ let ImplantacaoComponent = class ImplantacaoComponent {
         this.maquinario = 0;
     }
     saveImplantacao() {
-        this.implantacao.cultura = this.cultura;
-        this.implantacao.adubacao = this.adubacao;
-        this.implantacao.semeadura = this.semeadura;
-        this.implantacao.maquinario = this.maquinario;
+        this.implantacao.fertilizing = this.adubacao;
+        this.implantacao.seeding = this.semeadura;
+        this.implantacao.machines = this.maquinario;
+        console.log(this.implantacao);
         this.safraService.saveImplementacao(this.implantacao);
     }
 };
