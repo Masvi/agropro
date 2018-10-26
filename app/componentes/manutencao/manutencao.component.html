@@ -1,0 +1,55 @@
+<section class="dashboard-header section-padding">
+    <div class="container-fluid">
+        <div class="row d-flex align-items-md-stretch">
+            <div class="col-lg-4 col-md-4">
+                <div class="card d-flex">
+                    <div class="card-header">
+                        <h4>Manutenção: {{cultura}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <label>Defensivos</label>
+                        <div class="form-group">
+                            <label>Fungicida</label>
+                            <div class="slidecontainer">
+                                <input type="range" min="{{fungMin}}" max="{{fungMax}}" value="0" class="slider" id="1" (change)="handleFungicida()" [(ngModel)]="fungicida">R${{fungicida}},00
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Herbicida</label>
+                            <div class="slidecontainer">
+                                <input type="range" min="{{herMin}}" max="{{herMax}}" value="50" class="slider" id="2" (change)="handleherbicida()" [(ngModel)]="herbicida">R${{herbicida}},00
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Inseticida</label>
+                            <div class="slidecontainer">
+                                <input type="range" min="{{inseMin}}" max="{{inseMax}}" value="50" class="slider" id="3" (change)="handleInseticida()" [(ngModel)]="inseticida">R${{inseticida}},00
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Maquinário</label>
+                            <div class="slidecontainer">
+                                <input type="range" min="{{maqMin}}" max="{{maqMax}}" value="50" class="slider" id="4" (change)="handleMaquinario()" [(ngModel)]="maquinario">R${{maquinario}},00
+                            </div>
+                        </div>
+                        <div class="card-footer" *ngIf="maqui!= 0 ">
+                            <div class="text-right">
+                                <h4>Total</h4>
+                                R${{y}}
+                                <div class="offset-sm-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-default btn-sm" (click)="handleCancel()">Cancelar</button>
+                                        <button type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Salvar resultados</button>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <button type="submit" class="btn btn-primary btn-sm" [routerLink]="['/colheita',culturaId]">Iniciar colheita</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

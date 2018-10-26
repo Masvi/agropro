@@ -1,0 +1,56 @@
+<section class="dashboard-header section-padding">
+    <div class="container-fluid">
+        <div class="row d-flex align-items-md-stretch">
+            <div class="col-lg-4 col-md-4">
+                <div class="card d-flex">
+                    <div class="card-header">
+                        <h4>Implantação</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Cultura</label>
+                            <div class="i-checks " *ngFor="let w of culture">
+                                <input type="radio" name="culture" class="form-control-custom radio-custom" [id]="w.id + '_culture'" [value]="w.id" (change)="cultureOption()"
+                                    [(ngModel)]="teste">
+                                <label [for]="w.id + '_culture'">{{w.description}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Adubação</label>
+                            <div class="slidecontainer">
+                                <input type="range" min="{{adubMin}}" max="{{adubMax}}" value="0" class="slider" id="adub" (change)="handleAdub()" [(ngModel)]="adubcao">R${{adubcao}},00
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Semeadura</label>
+                            <div class="slidecontainer">
+                                <input type="range" min="{{semMin}}" max="{{semMax}}" value="50" class="slider" id="sem" (change)="handleSem()" [(ngModel)]="semeadura">R${{semeadura}},00
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Maquinario</label>
+                            <div class="slidecontainer">
+                                <input type="range" min="{{maqMin}}" max="{{maqMax}}" value="50" class="slider" id="maq" (change)="handleMaqu()" [(ngModel)]="maquinario">R${{maquinario}},00
+                            </div>
+                        </div>
+                        <div class="card-footer" *ngIf="c != 0 && teste != 0">
+                            <div class="text-right">
+                                <h4>Total</h4>
+                                R${{y}}
+                                <div class="offset-sm-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-default btn-sm" (click)="handleCancel()">Cancelar</button>
+                                        <button type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Salvar resultados</button>
+                                    </div>
+                                    <div class="line"></div>                              
+                                    <div class="line"></div>                              
+                            <button type="submit" class="btn btn-primary btn-sm" [routerLink]="['/manutencao', teste]">Iniciar manutenção</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
