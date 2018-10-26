@@ -1,6 +1,8 @@
 declare var { $ }: any;
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Colheita } from '../../classes/colheita'
+import { SafraService } from '../../services/safra-service';
 
 const maquinarioSoja = [1, 10];
 const maquinarioTrigo = [1, 10];
@@ -22,17 +24,19 @@ const transporteFrutif = [1, 10];
 export class ColheitaComponent implements OnInit {
 
     cultura: string;
+    colheita: Colheita;
     transporte: number;
     maquinario: number;
     maqMin: number;
     maqMax: number;
     transMin: number;
     transMax: number;
-
+    total: number;
     trans: number = 0;
     maqui: number = 0;
 
-    constructor(private route: ActivatedRoute, private router: Router) {
+    constructor(private route: ActivatedRoute, private router: Router, private safraService:SafraService) {
+        this.colheita = new Colheita();
         this.route.params.subscribe(params => {
             if (params['id'] === '1') {
                 console.log('frutifera');
@@ -50,18 +54,25 @@ export class ColheitaComponent implements OnInit {
             if (params['id'] === '4') {
                 console.log('trigo');
                 this.cultura = "Trigo";
-
             }
         });
     }
     ngOnInit() { }
-    
-    handleMaquinario(){
+
+    handleMaquinario() {
         this.maqui = this.maquinario;
     }
 
-    handleTransporte(){
-        this.trans =this.transporte;
+    handleTransporte() {
+        this.trans = this.transporte;
     }
+
+    saveColheita() {
+        this.colheita.cultura = this.cultura;
+        this.colheita.maquinario = this.maquinario;
+        this.colheita.transporte = this.transporte;
+        this.colheita.total = this.total;
+        this.safraService.saveColheita(this.colheita);
+    }   
 
 }

@@ -15,6 +15,7 @@ import { UtilidadeModule } from './componentes/utilidade/utilidade.module';
 import { ManutencaoModule } from './componentes/manutencao/manutencao.module';
 import { ImplantacaoModule } from './componentes/implantacao/implantacao.module';
 import { PropriedadeModule } from './componentes/propriedade/propriedade.module';
+import { RastreabilidadeModule } from './componentes/rastreabilidade/rastreabilidade.module'
 
 
 @NgModule({
@@ -22,10 +23,11 @@ import { PropriedadeModule } from './componentes/propriedade/propriedade.module'
         HttpModule,
         BrowserModule,
         UtilidadeModule,
+        ManutencaoModule,
         AppRountingModule,
         PropriedadeModule,
         ImplantacaoModule,
-        ManutencaoModule
+        RastreabilidadeModule
         // InMemoryWebApiModule.forRoot(InMemoryDataService)
     ],
     declarations: [

@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
+const manutencao_1 = require("../../classes/manutencao");
+const safra_service_1 = require("../../services/safra-service");
 // defensivos
 const herbicidaSoja = [1, 10];
 const inseticidaSoja = [1, 10];
@@ -29,13 +31,15 @@ const maquinarioTrigo = [1, 10];
 const maquinarioHortal = [1, 10];
 const maquinarioFrutif = [1, 10];
 let ManutencaoComponent = class ManutencaoComponent {
-    constructor(route, router) {
+    constructor(route, router, safraService) {
         this.route = route;
         this.router = router;
+        this.safraService = safraService;
         this.inset = 0;
         this.fungi = 0;
         this.herbi = 0;
         this.maqui = 0;
+        this.manutencao = new manutencao_1.Manutencao();
         this.route.params.subscribe(params => {
             if (params['id'] === '1') {
                 console.log('frutifera');
@@ -104,6 +108,14 @@ let ManutencaoComponent = class ManutencaoComponent {
     handleMaquinario() {
         this.maqui = this.maquinario;
     }
+    saveManutencao() {
+        this.manutencao.maquinario = this.maquinario;
+        this.manutencao.inseticida = this.inseticida;
+        this.manutencao.herbicida = this.herbicida;
+        this.manutencao.fungicida = this.fungicida;
+        this.manutencao.cultura = this.cultura;
+        this.safraService.saveManutencao(this.manutencao);
+    }
 };
 ManutencaoComponent = __decorate([
     core_1.Component({
@@ -112,7 +124,7 @@ ManutencaoComponent = __decorate([
         templateUrl: 'manutencao.component.html',
         styleUrls: ['manutencao.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, safra_service_1.SafraService])
 ], ManutencaoComponent);
 exports.ManutencaoComponent = ManutencaoComponent;
 //# sourceMappingURL=manutencao.component.js.map

@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
+const colheita_1 = require("../../classes/colheita");
+const safra_service_1 = require("../../services/safra-service");
 const maquinarioSoja = [1, 10];
 const maquinarioTrigo = [1, 10];
 const maquinarioHortal = [1, 10];
@@ -19,11 +21,13 @@ const transporteTrigo = [1, 10];
 const transporteHortal = [1, 10];
 const transporteFrutif = [1, 10];
 let ColheitaComponent = class ColheitaComponent {
-    constructor(route, router) {
+    constructor(route, router, safraService) {
         this.route = route;
         this.router = router;
+        this.safraService = safraService;
         this.trans = 0;
         this.maqui = 0;
+        this.colheita = new colheita_1.Colheita();
         this.route.params.subscribe(params => {
             if (params['id'] === '1') {
                 console.log('frutifera');
@@ -50,6 +54,13 @@ let ColheitaComponent = class ColheitaComponent {
     handleTransporte() {
         this.trans = this.transporte;
     }
+    saveColheita() {
+        this.colheita.cultura = this.cultura;
+        this.colheita.maquinario = this.maquinario;
+        this.colheita.transporte = this.transporte;
+        this.colheita.total = this.total;
+        this.safraService.saveColheita(this.colheita);
+    }
 };
 ColheitaComponent = __decorate([
     core_1.Component({
@@ -58,7 +69,7 @@ ColheitaComponent = __decorate([
         templateUrl: 'colheita.component.html',
         styleUrls: ['colheita.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, safra_service_1.SafraService])
 ], ColheitaComponent);
 exports.ColheitaComponent = ColheitaComponent;
 //# sourceMappingURL=colheita.component.js.map

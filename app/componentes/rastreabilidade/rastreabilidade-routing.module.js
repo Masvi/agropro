@@ -7,32 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
-const appRouts = [
-    {
-        path: '',
-        redirectTo: '/propriedade',
-        pathMatch: 'full'
-    },
-    {
-        path: 'implantacao',
-        redirectTo: 'componentes/implatancao'
-    },
+const rastreabilidade_component_1 = require("./rastreabilidade.component");
+const contatoRoutes = [
     {
         path: 'rastreabilidade',
-        redirectTo: 'componentes/rastreabilidade'
+        component: rastreabilidade_component_1.RastreabilidadeComponent
     }
 ];
-let AppRountingModule = class AppRountingModule {
+let RastreabilidadeRountingModule = class RastreabilidadeRountingModule {
 };
-AppRountingModule = __decorate([
+RastreabilidadeRountingModule = __decorate([
     core_1.NgModule({
         imports: [
-            router_1.RouterModule.forRoot(appRouts)
+            router_1.RouterModule.forChild(contatoRoutes)
         ],
-        exports: [
-            router_1.RouterModule
-        ]
+        exports: [router_1.RouterModule]
     })
-], AppRountingModule);
-exports.AppRountingModule = AppRountingModule;
-//# sourceMappingURL=app-rounting.module.js.map
+], RastreabilidadeRountingModule);
+exports.RastreabilidadeRountingModule = RastreabilidadeRountingModule;
+//# sourceMappingURL=rastreabilidade-routing.module.js.map

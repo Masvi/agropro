@@ -1,6 +1,9 @@
 declare var { $ }: any;
-import {Router} from '@angular/router';
-import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Implantacao } from '../../classes/implantacao';
+import { SafraService } from '../../services/safra-service';
+
 // frutiferas
 const impFrutAdubcao = [1.500, 22.000];
 const impFrutSemeadura = ['100.000', '630.097'];
@@ -22,7 +25,8 @@ const impTrigoMaquinario = ['2450', '12060'];
     moduleId: module.id,
     selector: 'implantacao',
     templateUrl: 'implantacao.component.html',
-    styleUrls: ['implantacao.component.css']
+    styleUrls: ['implantacao.component.css'],
+    providers: [SafraService]
 })
 
 
@@ -31,9 +35,12 @@ export class ImplantacaoComponent implements OnInit {
     teste: any;
     valor: any;
     total: number;
-    adubcao: any;
+    adubacao: any;
     semeadura: any;
     maquinario: any;
+    cultura: string;
+
+    implantacao: Implantacao;
 
     adubMin: any;
     adubMax: any;
@@ -67,63 +74,67 @@ export class ImplantacaoComponent implements OnInit {
     ];
 
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private safraService: SafraService) {
         this.teste = 0;
-     }
+        this.implantacao = new Implantacao();
+        console.log(this.culture)
+    }
 
     ngOnInit() { }
 
     cultureOption() {
         if (this.teste == 1) { // frutiferas
+            this.cultura = "Frutiferas";
             this.adubMin = impFrutAdubcao[0];
             this.adubMax = impFrutAdubcao[1];
             this.semMin = impFrutSemeadura[0];
             this.semMax = impFrutSemeadura[1];
             this.maqMin = impFrutMaquinario[0];
             this.maqMax = impFrutMaquinario[1];
-            this.adubcao = this.adubMin;
+            this.adubacao = this.adubMin;
             this.semeadura = this.semMin;
             this.maquinario = this.maqMin;
-
-            console.log(this.adubMax)
         }
         if (this.teste == 2) { // horatalicas
+            this.cultura = "Hortaliças";
             this.adubMin = impHortAdubcao[0];
             this.adubMax = impHortAdubcao[1];
             this.semMin = impHortSemeadura[0];
             this.semMax = impHortSemeadura[1];
             this.maqMin = impHortMaquinario[0];
             this.maqMax = impHortMaquinario[1];
-            this.adubcao = this.adubMin;
+            this.adubacao = this.adubMin;
             this.semeadura = this.semMin;
             this.maquinario = this.maqMin;
         }
         if (this.teste == 3) { // soja
+            this.cultura = "Soja";
             this.adubMin = impSojaAdubcao[0];
             this.adubMax = impSojaAdubcao[1];
             this.semMin = impSojaSemeadura[0];
             this.semMax = impSojaSemeadura[1];
             this.maqMin = impSojaMaquinario[0];
             this.maqMax = impSojaMaquinario[1];
-            this.adubcao = this.adubMin;
+            this.adubacao = this.adubMin;
             this.semeadura = this.semMin;
             this.maquinario = this.maqMin;
         }
         if (this.teste == 4) { // trigo
+            this.cultura = "Trigo";
             this.adubMin = impTrigoAdubcao[0];
             this.adubMax = impTrigoAdubcao[1];
             this.semMin = impTrigoSemeadura[0];
             this.semMax = impTrigoSemeadura[1];
             this.maqMin = impTrigoMaquinario[0];
             this.maqMax = impTrigoMaquinario[1];
-            this.adubcao = this.adubMin;
+            this.adubacao = this.adubMin;
             this.semeadura = this.semMin;
             this.maquinario = this.maqMin;
         }
     }
 
     handleAdub() {
-        this.a = this.adubcao;
+        this.a = this.adubacao;
         this.handleImplatacao();
     }
 
@@ -139,21 +150,24 @@ export class ImplantacaoComponent implements OnInit {
 
     handleImplatacao() {
         this.total = this.a + this.b + this.c;
-         this.y = this.total.toLocaleString();
+        this.y = this.total.toLocaleString();
     }
 
-    handleCancel(){
+    handleCancel() {
         this.total = 0;
-        this.a = 0; 
+        this.a = 0;
         this.b = 0;
         this.c = 0;
-        this.adubcao=0;
-        this.semeadura=0;
-        this.maquinario=0;
+        this.adubacao = 0;
+        this.semeadura = 0;
+        this.maquinario = 0;
     }
-    handleRedirect(){
-        console.log('teste' +this.teste)
 
-        this.router.navigate(['manutencao/manutencao/',+this.teste]);
+    saveImplantacao() {
+        this.implantacao.cultura = this.cultura;
+        this.implantacao.adubacao = this.adubacao;
+        this.implantacao.semeadura = this.semeadura;
+        this.implantacao.maquinario = this.maquinario;
+        this.safraService.saveImplementacao(this.implantacao);
     }
 }

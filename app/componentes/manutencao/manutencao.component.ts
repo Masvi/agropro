@@ -1,6 +1,8 @@
 declare var { $ }: any;
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Manutencao } from '../../classes/manutencao';
+import { SafraService } from '../../services/safra-service';
 
 // defensivos
 const herbicidaSoja = [1, 10];
@@ -30,6 +32,7 @@ const maquinarioFrutif = [1, 10];
 
 export class ManutencaoComponent implements OnInit {
 
+    manutencao: Manutencao;
     teste: any;
     valor: any;
     cultura: string;
@@ -53,7 +56,8 @@ export class ManutencaoComponent implements OnInit {
     herbi: number = 0;
     maqui: number = 0;
 
-    constructor(private route: ActivatedRoute, private router: Router) {
+    constructor(private route: ActivatedRoute, private router: Router, private safraService:SafraService) {
+        this.manutencao = new Manutencao();
         this.route.params.subscribe(params => {
             if (params['id'] === '1') {
                 console.log('frutifera');
@@ -123,5 +127,14 @@ export class ManutencaoComponent implements OnInit {
     }
     handleMaquinario() {
         this.maqui = this.maquinario;
+    }
+
+    saveManutencao() {
+        this.manutencao.maquinario = this.maquinario;
+        this.manutencao.inseticida = this.inseticida;
+        this.manutencao.herbicida = this.herbicida;
+        this.manutencao.fungicida = this.fungicida;
+        this.manutencao.cultura = this.cultura;
+        this.safraService.saveManutencao(this.manutencao);
     }
 }

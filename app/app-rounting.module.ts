@@ -11,10 +11,10 @@ const appRouts: Routes = [
         path: 'implantacao',
         redirectTo: 'componentes/implatancao'
     },
-    // {
-    //     path: 'manutencao',
-    //     redirectTo: 'componentes/manutencao'
-    // }
+    {
+        path: 'rastreabilidade',
+        redirectTo: 'componentes/rastreabilidade'
+    }
 
 ]
 

@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: 'propriedade.component.html'
 })
 
-
 export class PropriedadeComponent {
 
     constructor(){

@@ -17,6 +17,7 @@ const utilidade_module_1 = require("./componentes/utilidade/utilidade.module");
 const manutencao_module_1 = require("./componentes/manutencao/manutencao.module");
 const implantacao_module_1 = require("./componentes/implantacao/implantacao.module");
 const propriedade_module_1 = require("./componentes/propriedade/propriedade.module");
+const rastreabilidade_module_1 = require("./componentes/rastreabilidade/rastreabilidade.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -25,10 +26,11 @@ AppModule = __decorate([
             http_1.HttpModule,
             platform_browser_1.BrowserModule,
             utilidade_module_1.UtilidadeModule,
+            manutencao_module_1.ManutencaoModule,
             app_rounting_module_1.AppRountingModule,
             propriedade_module_1.PropriedadeModule,
             implantacao_module_1.ImplantacaoModule,
-            manutencao_module_1.ManutencaoModule
+            rastreabilidade_module_1.RastreabilidadeModule
         ],
         declarations: [
             app_component_1.AppComponent,
